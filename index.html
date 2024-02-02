@@ -1,0 +1,378 @@
+<html>
+<head>
+  <style>
+    /* Estilos CSS para o layout e a aparência do emulador de elevador */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .building {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      width: 80%;
+      height: 80%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .elevator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 30%;
+      height: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .floor {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 10%;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .floor:last-child {
+      border-bottom: none;
+    }
+
+    .floor-number {
+      width: 10%;
+      text-align: center;
+    }
+
+    .call-button {
+      width: 10%;
+      height: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      background-color: #ccc;
+      cursor: pointer;
+    }
+
+    .call-button.active {
+      background-color: yellow;
+    }
+
+    .door {
+      width: 8%; /* Definindo a largura das portas */
+      height: 80%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: #8b4513;
+    }
+
+    /* Estilo das portas baseado no número do andar */
+    .door.floor-1, .door.floor-2, .door.floor--1, .door.floor--2 {
+      width: 8%; /* Largura para os andares -2, -1, 1, 2 */
+    }
+    .door.floor-0 {
+      width: 10%; /* Largura para o andar 0 */
+    }
+    .door.floor-3, .door.floor-4, .door.floor-5, .door.floor-6, .door.floor-7, .door.floor-8 {
+      width: 6%; /* Largura para os andares 3, 4, 5, 6, 7, 8 */
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      width: 20%;
+      height: 80%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: #ccc;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .floor-button {
+      width: 50%;
+      height: 10%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    .floor-button.active {
+      background-color: green;
+    }
+
+    .screen {
+      width: 80%;
+      height: 20%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: #000;
+      color: white;
+      text-align: center;
+      font-size: 20px;
+      line-height: 20px;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="container">
+        <div class="building">
+          <!-- Elevador 1 -->
+          <div class="elevator" id="elevator-1">
+            <div class="floor" id="floor-8-1">
+              <div class="floor-number">8</div>
+              <div class="call-button" id="call-button-8-1" data-floor="8" data-elevator="1"></div>
+              <div class="door left" id="door-left-8-1"></div>
+              <div class="door right" id="door-right-8-1"></div>
+            </div>
+            <div class="floor" id="floor-7-1">
+              <div class="floor-number">7</div>
+              <div class="call-button" id="call-button-7-1" data-floor="7" data-elevator="1"></div>
+              <div class="door left" id="door-left-7-1"></div>
+              <div class="door right" id="door-right-7-1"></div>
+            </div>
+            <div class="floor" id="floor-6-1">
+              <div class="floor-number">6</div>
+              <div class="call-button" id="call-button-6-1" data-floor="6" data-elevator="1"></div>
+              <div class="door left" id="door-left-6-1"></div>
+              <div class="door right" id="door-right-6-1"></div>
+            </div>
+            <div class="floor" id="floor-5-1">
+              <div class="floor-number">5</div>
+              <div class="call-button" id="call-button-5-1" data-floor="5" data-elevator="1"></div>
+              <div class="door left" id="door-left-5-1"></div>
+              <div class="door right" id="door-right-5-1"></div>
+            </div>
+            <div class="floor" id="floor-4-1">
+              <div class="floor-number">4</div>
+              <div class="call-button" id="call-button-4-1" data-floor="4" data-elevator="1"></div>
+              <div class="door left" id="door-left-4-1"></div>
+              <div class="door right" id="door-right-4-1"></div>
+            </div>
+            <div class="floor" id="floor-3-1">
+              <div class="floor-number">3</div>
+              <div class="call-button" id="call-button-3-1" data-floor="3" data-elevator="1"></div>
+              <div class="door left" id="door-left-3-1"></div>
+              <div class="door right" id="door-right-3-1"></div>
+            </div>
+            <div class="floor" id="floor-2-1">
+              <div class="floor-number">2</div>
+              <div class="call-button" id="call-button-2-1" data-floor="2" data-elevator="1"></div>
+              <div class="door left" id="door-left-2-1"></div>
+              <div class="door right" id="door-right-2-1"></div>
+            </div>
+            <div class="floor" id="floor-1-1">
+              <div class="floor-number">1</div>
+              <div class="call-button" id="call-button-1-1" data-floor="1" data-elevator="1"></div>
+              <div class="door left" id="door-left-1-1"></div>
+              <div class="door right" id="door-right-1-1"></div>
+            </div>
+            <div class="floor" id="floor-0-1">
+              <div class="floor-number">0</div>
+              <div class="call-button" id="call-button-0-1" data-floor="0" data-elevator="1"></div>
+              <div class="door left" id="door-left-0-1"></div>
+              <div class="door right" id="door-right-0-1"></div>
+            </div>
+            <div class="floor" id="floor--1-1">
+              <div class="floor-number">-1</div>
+              <div class="call-button" id="call-button--1-1" data-floor="-1" data-elevator="1"></div>
+              <div class="door left" id="door-left--1-1"></div>
+              <div class="door right" id="door-right--1-1"></div>
+            </div>
+            <div class="floor" id="floor--2-1">
+              <div class="floor-number">-2</div>
+              <div class="call-button" id="call-button--2-1" data-floor="-2" data-elevator="1"></div>
+              <div class="door left" id="door-left--2-1"></div>
+              <div class="door right" id="door-right--2-1"></div>
+            </div>
+            <div class="panel" id="panel-1">
+              <div class="floor-button" id="floor-button-8-1" data-floor="8" data-elevator="1">8</div>
+              <div class="floor-button" id="floor-button-7-1" data-floor="7" data-elevator="1">7</div>
+              <div class="floor-button" id="floor-button-6-1" data-floor="6" data-elevator="1">6</div>
+              <div class="floor-button" id="floor-button-5-1" data-floor="5" data-elevator="1">5</div>
+              <div class="floor-button" id="        floor-button-4-1" data-floor="4" data-elevator="1">4</div>
+              <div class="floor-button" id="floor-button-3-1" data-floor="3" data-elevator="1">3</div>
+              <div class="floor-button" id="floor-button-2-1" data-floor="2" data-elevator="1">2</div>
+              <div class="floor-button" id="floor-button-1-1" data-floor="1" data-elevator="1">1</div>
+              <div class="floor-button" id="floor-button-0-1" data-floor="0" data-elevator="1">T</div>
+              <div class="floor-button" id="floor-button--1-1" data-floor="-1" data-elevator="1">SS1</div>
+              <div class="floor-button" id="floor-button--2-1" data-floor="-2" data-elevator="1">SS2</div>
+              <div class="screen" id="screen-1">...</div>
+            </div>
+          </div>
+      <!-- Elevador 2 -->
+<div class="elevator" id="elevator-2">
+    <div class="floor" id="floor-8-2">
+      <div class="floor-number">8</div>
+      <div class="call-button" id="call-button-8-2" data-floor="8" data-elevator="2"></div>
+      <div class="door left" id="door-left-8-2"></div>
+      <div class="door right" id="door-right-8-2"></div>
+    </div>
+    <div class="floor" id="floor-7-2">
+      <div class="floor-number">7</div>
+      <div class="call-button" id="call-button-7-2" data-floor="7" data-elevator="2"></div>
+      <div class="door left" id="door-left-7-2"></div>
+      <div class="door right" id="door-right-7-2"></div>
+    </div>
+    <div class="floor" id="floor-6-2">
+      <div class="floor-number">6</div>
+      <div class="call-button" id="call-button-6-2" data-floor="6" data-elevator="2"></div>
+      <div class="door left" id="door-left-6-2"></div>
+      <div class="door right" id="door-right-6-2"></div>
+    </div>
+    <div class="floor" id="floor-5-2">
+      <div class="floor-number">5</div>
+      <div class="call-button" id="call-button-5-2" data-floor="5" data-elevator="2"></div>
+      <div class="door left" id="door-left-5-2"></div>
+      <div class="door right" id="door-right-5-2"></div>
+    </div>
+    <div class="floor" id="floor-4-2">
+      <div class="floor-number">4</div>
+      <div class="call-button" id="call-button-4-2" data-floor="4" data-elevator="2"></div>
+      <div class="door left" id="door-left-4-2"></div>
+      <div class="door right" id="door-right-4-2"></div>
+    </div>
+    <div class="floor" id="floor-3-2">
+      <div class="floor-number">3</div>
+      <div class="call-button" id="call-button-3-2" data-floor="3" data-elevator="2"></div>
+      <div class="door left" id="door-left-3-2"></div>
+      <div class="door right" id="door-right-3-2"></div>
+    </div>
+    <div class="floor" id="floor-2-2">
+      <div class="floor-number">2</div>
+      <div class="call-button" id="call-button-2-2" data-floor="2" data-elevator="2"></div>
+      <div class="door left" id="door-left-2-2"></div>
+      <div class="door right" id="door-right-2-2"></div>
+    </div>
+    <div class="floor" id="floor-1-2">
+      <div class="floor-number">1</div>
+      <div class="call-button" id="call-button-1-2" data-floor="1" data-elevator="2"></div>
+      <div class="door left" id="door-left-1-2"></div>
+      <div class="door right" id="door-right-1-2"></div>
+    </div>
+    <div class="floor" id="floor-0-2">
+      <div class="floor-number">0</div>
+      <div class="call-button" id="call-button-0-2" data-floor="0" data-elevator="2"></div>
+      <div class="door left" id="door-left-0-2"></div>
+      <div class="door right" id="door-right-0-2"></div>
+    </div>
+    <div class="floor" id="floor--1-2">
+      <div class="floor-number">-1</div>
+      <div class="call-button" id="call-button--1-2" data-floor="-1" data-elevator="2"></div>
+      <div class="door left" id="door-left--1-2"></div>
+      <div class="door right" id="door-right--1-2"></div>
+    </div>
+    <div class="floor" id="floor--2-2">
+      <div class="floor-number">-2</div>
+      <div class="call-button" id="call-button--2-2" data-floor="-2" data-elevator="2"></div>
+      <div class="door left" id="door-left--2-2"></div>
+      <div class="door right" id="door-right--2-2"></div>
+    </div>
+    <div class="panel" id="panel-2">
+      <div class="floor-button" id="floor-button-8-2" data-floor="8" data-elevator="2">8</div>
+      <div class="floor-button" id="floor-button-7-2" data-floor="7" data-elevator="2">7</div>
+      <div class="floor-button" id="floor-button-6-2" data-floor="6" data-elevator="2">6</div>
+      <div class="floor-button" id="floor-button-5-2" data-floor="5" data-elevator="2">5</div>
+      <div class="floor-button" id="floor-button-4-2" data-floor="4" data-elevator="2">4</div>
+      <div class="floor-button" id="floor-button-3-2" data-floor="3" data-elevator="2">3</div>
+      <div class="floor-button" id="floor-button-2-2" data-floor="2" data-elevator="2">2</div>
+      <div class="floor-button" id="floor-button-1-2" data-floor="1" data-elevator="2">1</div>
+      <div class="floor-button" id="floor-button-0-2" data-floor="0" data-elevator="2">T</div>
+      <div class="floor-button" id="floor-button--1-2" data-floor="-1" data-elevator="2">SS1</div>
+      <div class="floor-button" id="floor-button--2-2" data-floor="-2" data-elevator="2">SS2</div>
+      <div class="screen" id="screen-2">...</div>
+    </div>
+  </div>
+  
+
+  <script>
+    // Função para abrir as portas do elevador
+    function openDoors(elevatorId, floor) {
+      document.getElementById(`door-left-${floor}-${elevatorId}`).style.transform = "translateX(-50%)";
+      document.getElementById(`door-right-${floor}-${elevatorId}`).style.transform = "translateX(50%)";
+    }
+
+    // Função para fechar as portas do elevador
+    function closeDoors(elevatorId, floor) {
+      document.getElementById(`door-left-${floor}-${elevatorId}`).style.transform = "translateX(0)";
+      document.getElementById(`door-right-${floor}-${elevatorId}`).style.transform = "translateX(0)";
+    }
+
+    // Função para mover o elevador para um andar específico
+    function moveElevator(elevatorId, floor) {
+      const elevator = document.getElementById(`elevator-${elevatorId}`);
+      const targetFloor = document.getElementById(`floor-${floor}-${elevatorId}`);
+      const elevatorPosition = elevator.offsetTop;
+      const targetPosition = targetFloor.offsetTop;
+      const distance = Math.abs(elevatorPosition - targetPosition);
+      const duration = distance * 10; // Ajuste conforme necessário
+
+      openDoors(elevatorId, floor);
+
+      setTimeout(() => {
+        elevator.style.top = `${targetPosition}px`;
+        setTimeout(() => {
+          closeDoors(elevatorId, floor);
+          document.getElementById(`screen-${elevatorId}`).textContent = `Andar ${floor}`;
+          setTimeout(() => {
+            document.getElementById(`screen-${elevatorId}`).textContent = "Você chegou ao seu destino";
+          }, 5000); // Tempo para exibir a mensagem de chegada ao destino (em milissegundos)
+        }, 2000); // Tempo para manter as portas abertas (em milissegundos)
+      }, duration);
+    }
+
+    // Função para atualizar o visor do elevador com o andar atual
+    function updateScreen(elevatorId, floor) {
+      document.getElementById(`screen-${elevatorId}`).textContent = `Andar ${floor}`;
+    }
+
+    // Função para lidar com o clique nos botões de chamada de elevador
+    function handleCallButton(e) {
+      const floor = e.target.dataset.floor;
+      const elevatorId = e.target.dataset.elevator;
+
+      moveElevator(elevatorId, floor);
+      updateScreen(elevatorId, floor);
+    }
+
+    // Função para lidar com o clique nos botões de seleção de andar dentro do elevador
+    function handleFloorButton(e) {
+      const floor = e.target.dataset.floor;
+      const elevatorId = e.target.dataset.elevator;
+
+      moveElevator(elevatorId, floor);
+      updateScreen(elevatorId, floor);
+    }
+
+    // Adicionando os listeners de evento aos botões de chamada de elevador
+    const callButtons = document.querySelectorAll('.call-button');
+    callButtons.forEach(button => {
+      button.addEventListener('click', handleCallButton);
+    });
+
+    // Adicionando os listeners de evento aos botões de seleção de andar dentro do elevador
+    const floorButtons = document.querySelectorAll('.floor-button');
+    floorButtons.forEach(button => {
+      button.addEventListener('click', handleFloorButton);
+    });
+  </script>
+
+</body>
+</html>
